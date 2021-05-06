@@ -1,5 +1,6 @@
 ﻿@page "/fetchdata"
 @using TestLogging.Shared
+@using Serilog
 @inject HttpClient Http
 
 <h1>Weather forecast</h1>
@@ -40,6 +41,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        Log.Warning("I am Here!");
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
     }
 
