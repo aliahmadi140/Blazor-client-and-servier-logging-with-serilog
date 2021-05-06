@@ -20,16 +20,16 @@ namespace TestLogging.Server
         public static void Main(string[] args)
         {
             //Serilog.Debugging.SelfLog.Enable(m => Console.Error.WriteLine(m));
-            //var currentDirectory = Directory.GetCurrentDirectory();
-            //Log.Logger = new LoggerConfiguration()
-            //     .MinimumLevel.Warning()
-            //   //  .Enrich.FromLogContext()
-            //     .WriteTo.File(new JsonFormatter(), $"{currentDirectory}//Logs//Log.txt", shared: true)
-            //     .CreateLogger();
+            var currentDirectory = Directory.GetCurrentDirectory();
+            Log.Logger = new LoggerConfiguration()
+                 .MinimumLevel.Warning()
+                 //  .Enrich.FromLogContext()
+                 .WriteTo.File(new JsonFormatter(), $"{currentDirectory}//Logs//Log.txt", shared: true)
+                 .CreateLogger();
 
 
-        
-            
+
+
 
             Log.Information("hi im a log");
                 

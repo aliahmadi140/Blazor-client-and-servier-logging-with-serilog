@@ -22,16 +22,15 @@ namespace TestLogging.Client
 
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-            var currentDirectory = Directory.GetCurrentDirectory();
+
             var levelSwitch = new LoggingLevelSwitch();
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.ControlledBy(levelSwitch)
             .WriteTo.BrowserConsole()
             .WriteTo.BrowserHttp($"{builder.HostEnvironment.BaseAddress}ingest", controlLevelSwitch: levelSwitch)
-            .WriteTo.File(new JsonFormatter(), $"{currentDirectory}//Logs//Log.txt", shared: true)
             .CreateLogger();
 
-          
+
 
             Log.Information("Hi Browser!");
 
