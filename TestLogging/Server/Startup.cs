@@ -36,7 +36,7 @@ namespace TestLogging.Server
         {
 
            
-            //  app.UseMiddleware<RequestLoggingMiddleware>();
+          app.UseMiddleware<RequestLoggingMiddleware>();
 
             if (env.IsDevelopment())
             {

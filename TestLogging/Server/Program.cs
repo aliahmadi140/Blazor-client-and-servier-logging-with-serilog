@@ -22,7 +22,7 @@ namespace TestLogging.Server
             //Serilog.Debugging.SelfLog.Enable(m => Console.Error.WriteLine(m));
             var currentDirectory = Directory.GetCurrentDirectory();
             Log.Logger = new LoggerConfiguration()
-                 .MinimumLevel.Warning()
+                 .MinimumLevel.Information()
                  //  .Enrich.FromLogContext()
                  .WriteTo.File(new JsonFormatter(), $"{currentDirectory}//Logs//Log.txt", shared: true)
                  .CreateLogger();

@@ -12,11 +12,11 @@ namespace TestLogging.Server.Services.Logging
     public class RequestLoggingMiddleware
     {
         private readonly RequestDelegate _next;
-        //private readonly ILogger _logger;
-        public RequestLoggingMiddleware(RequestDelegate next/*, ILoggerFactory loggerFactory*/)
+       
+        public RequestLoggingMiddleware(RequestDelegate next)
         {
             _next = next;
-           // _logger = loggerFactory.CreateLogger<RequestLoggingMiddleware>();
+           
         }
 
         public async Task Invoke(HttpContext context)
@@ -27,17 +27,15 @@ namespace TestLogging.Server.Services.Logging
             }
             finally
             {
-                //_logger.LogInformation(
-                //    "Request {method} {url} => {statusCode}",
-                //    context.Request?.Method,
-                //    context.Request?.Path.Value,
-                //    context.Response?.StatusCode);
+                if (context.Response.StatusCode != StatusCodes.Status200OK)
+                {
+                    Log.Error(
+                   "Request {method} { url} => { statusCode} ",
+              context.Request?.Method,
+              context.Request?.Path.Value,
+              context.Response?.StatusCode);
+                }
 
-                Log.Logger = new LoggerConfiguration()
-           .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-           .Enrich.FromLogContext()
-           .WriteTo.Console()
-           .CreateLogger();
 
             }
         }

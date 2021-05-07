@@ -20,8 +20,11 @@ namespace TestLogging.Client
         {
 
 
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            try
+            {
+                var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+           
 
             var levelSwitch = new LoggingLevelSwitch();
             Log.Logger = new LoggerConfiguration()
@@ -39,6 +42,12 @@ namespace TestLogging.Client
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             await builder.Build().RunAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex.Message);
+                throw;
+            }
         }
     }
 }
