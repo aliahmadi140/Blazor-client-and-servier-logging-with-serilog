@@ -24,7 +24,7 @@ namespace TestLogging.Server
             Log.Logger = new LoggerConfiguration()
                  .MinimumLevel.Information()
                  //  .Enrich.FromLogContext()
-                 .WriteTo.File(new JsonFormatter(), $"{currentDirectory}//Logs//Log.txt", shared: true)
+                 .WriteTo.RollingFile(new JsonFormatter(), $"{currentDirectory}//Logs//Log.json", shared: true)
                  .CreateLogger();
 
 

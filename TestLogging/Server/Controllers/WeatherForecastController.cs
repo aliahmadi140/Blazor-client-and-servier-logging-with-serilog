@@ -29,26 +29,17 @@ namespace TestLogging.Server.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            try
+            var rng = new Random();
+            throw new NullReferenceException();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
-                var rng = new Random();
-                throw new NullReferenceException();
-                return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(index),
-                    TemperatureC = rng.Next(-20, 55),
-                    Summary = Summaries[rng.Next(Summaries.Length)]
-                })
-                .ToArray();
-            }
-            catch (Exception ex)
-            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
 
-                ErrorLog.ProcessError(ex);
-                throw ex;
-            }
-            
-            
+
         }
     }
 }
